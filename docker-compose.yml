@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_DATABASE: project_FullAuthentication
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: vupilot
+      MYSQL_PASSWORD: anhlacho
+    ports:
+      - "3307:3306"
+    volumes:
+#      - ./flyPJ_db:/docker-entrypoint-initdb.d
+      - mysql-app-data:/var/lib/mysql
+      - mysql-config:/etc/mysql/conf.d
+    networks:
+      - backend
+  app:
+    build: .
+    container_name: project_FullAuthentication
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3307/project_FullAuthentication
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+  redis:
+    image: redis:7.0
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+volumes:
+  mysql-app-data:
+  mysql-config:
+  app:
