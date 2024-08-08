@@ -1,14 +1,14 @@
 package com.example.project_FullAuthentication.Service;
 
-import com.example.project_FullAuthentication.Entity.userEntity;
+import com.example.project_FullAuthentication.Entity.User;
 import com.example.project_FullAuthentication.Exception.CommonException;
 
 public interface userService {
-     userEntity getUser() throw CommonException;
-     void updateUser() throw CommonException;
-     void saveUSer() throw CommonException;
-     void activeUSer() throw CommonException;
-     void deleteuser() throw CommonException;
-     void resetPasswordviaEmail() throw CommonException;
+     User getUser() throws CommonException;
+     void updateUser() throws CommonException;
+     void saveUSer() throws CommonException;
+     void activeUSer() throws CommonException;
+     void deleteuser() throws CommonException;
+     void resetPasswordviaEmail() throws CommonException;
 
 }

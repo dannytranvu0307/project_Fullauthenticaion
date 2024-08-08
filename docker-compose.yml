@@ -17,19 +17,19 @@ services:
       - mysql-config:/etc/mysql/conf.d
     networks:
       - backend
-  app:
-    build: .
-    container_name: project_FullAuthentication
-    restart: always
-    depends_on:
-      - mysql
-      - redis
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3307/project_FullAuthentication
-    ports:
-      - 8080:8080
-    networks:
-      - backend
+#  app:
+#    build: .
+#    container_name: project_FullAuthentication
+#    restart: always
+#    depends_on:
+#      - mysql
+#      - redis
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3307/project_FullAuthentication
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - backend
   redis:
     image: redis:7.0
     container_name: redis
